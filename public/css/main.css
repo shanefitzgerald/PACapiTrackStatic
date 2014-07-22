@@ -196,7 +196,15 @@ a:after {
 	width: auto;
 }
 
+#REP {
+	background-color: rgba(233,29,14,0.7);
+	font-weight: bold;
+}
 
+#DEM {
+	background-color: rgba(35,32,102,0.7);
+	font-weight: bold;
+}
 
 
 
