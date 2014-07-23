@@ -232,16 +232,23 @@ a:after {
 }
 
 #dembarcontainer {
-    height: 400px; 
-    min-width: 310px; 
-    max-width: 100%;
+    height: 80vh; 
+    /*min-width: 310px;*/ 
+    width: 100%;
     margin: 0 auto;
 }
 
 #repbarcontainer {
-    height: 400px; 
-    min-width: 310px; 
-    max-width: auto;
+    height: 80vh; 
+    /*min-width: 310px;*/ 
+    width: 100%;
+    margin: 0 auto;
+}
+
+#piecontainer {
+    /*min-width: 310px;*/
+    height: 80vh;
+    width: 100%;
     margin: 0 auto;
 }
 

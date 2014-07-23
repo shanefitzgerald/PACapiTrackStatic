@@ -1,5 +1,6 @@
 $( document ).ready(function() {
     console.log( "ready!" );
+    $("#owl-example").owlCarousel();
 
 var repSum = 0;
 var demSum = 0;
