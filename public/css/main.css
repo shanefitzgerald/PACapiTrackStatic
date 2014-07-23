@@ -208,7 +208,13 @@ a:after {
 
 #newpacwrapper {
     height: 100vh;
-    background-color: #7C5329;
+    background-image: url(../images/Supreme_Court.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    widows: 100%;
+    margin-top: 10px;
+
 }
 
 #twentyNewestPacsContainer {
@@ -241,6 +247,7 @@ a:after {
     /*min-width: 310px;*/ 
     width: 100%;
     margin: 0 auto;
+    margin-left: 40px;
 }
 
 #repbarcontainer {
@@ -248,6 +255,7 @@ a:after {
     /*min-width: 310px;*/ 
     width: 100%;
     margin: 0 auto;
+    margin-left: 40px;
 }
 
 #piecontainer {
@@ -255,6 +263,11 @@ a:after {
     height: 90vh;
     width: 100%;
     margin: 0 auto;
+   
+}
+
+.carousel-control.left, .carousel-control.right {
+    background-image: none
 }
 
 

@@ -272,12 +272,14 @@ var repName = [];
                 direction: 'up',
                 duration: 20000,
                 duplicated: true,
+                pauseOnHover: true,
             });
             
             $('#twentyNewestSuperPacsContainer').marquee( {
                 direction: 'up',
                 duration: 20000,
                 duplicated: true,
+                pauseOnHover: true,
             });
     },9000);
 
