@@ -1,5 +1,16 @@
 $( document ).ready(function() {
     console.log( "ready!" );
+
+var repSum = 0;
+var demSum = 0;
+var x = [];
+var demTotalArray = [];
+var repTotalArray = [];
+var demTotalFromPacs = [];
+var repTotalFromPacs = [];
+var demName = [];
+var repName = [];
+
     $.ajax({
         url: "http://api.nytimes.com/svc/elections/us/v3/finances/2014/candidates/leaders/pac-total.json?api-key=c353cbc0ae7d858a504f6ed663c0a326:5:69483126",
         //force to handle it as jsonp by adding 'callback='
@@ -14,8 +25,173 @@ $( document ).ready(function() {
                                                 '<td>' + data1.results[key].date_coverage_to + '</td>' +
                                             '</tr>'
                                             )};
+
+                                        // This for loop builds arrays totaling total contributions and seperates them by republican and democrat
+                                        for (var key in data1.results) {
+                                            if (data1.results[key].party === "DEM"){
+                                            //build array of total contributions from democrats to use with highchart.js pie chart
+                                            demTotalArray.push(data1.results[key].total_contributions);
+                                            //build array of total contributions from pacs to use with highchart.js 3d bar chart
+                                            demTotalFromPacs.push(data1.results[key].total_from_pacs);
+                                            //bild array of dem names for highchart.js 3d bar chart
+                                            demName.push(data1.results[key].name);
+                                            } else {
+                                            //build array of total contributions from republicans to use with highchart.js pie chart
+                                            repTotalArray.push(data1.results[key].total_contributions);
+                                            //build array of total contributions from pacs to use with highchart.js 3d bar chart
+                                            repTotalFromPacs.push(data1.results[key].total_from_pacs);
+                                            //bild array of rep names for highchart.js 3d bar chart
+                                            repName.push(data1.results[key].name);
+                                            };
+                                        };
+
+                                        // make the total donations dem array numbers and not strings 
+                                        demTotalArray = demTotalArray.map(function (x) { 
+                                            return parseInt(x);
+                                        }); 
+                                        // make the total from pacs donations dem array numbers and not strings 
+                                        demTotalFromPacs = demTotalFromPacs.map(function (x) { 
+                                            return parseInt(x);
+                                        });
+                                        // make the total donations rep array numbers and not strings
+                                        repTotalArray = repTotalArray.map(function (x){
+                                            return parseInt(x);
+                                        });
+                                        // make the total from pacs donations rep array numbers and not strings
+                                        repTotalFromPacs = repTotalFromPacs.map(function (x){
+                                            return parseInt(x);
+                                        });
+
+                                        // sum the array of demsTotalArray
+                                        var demSum = 0;
+                                        $.each(demTotalArray, function(){
+                                            demSum += this;
+                                        });
+                                        // sum the array of repsTotalArray
+                                        var repSum = 0;
+                                        $.each(repTotalArray, function(){
+                                            repSum += this;
+                                        });
+
+                                        x.push(
+                                            ['Democrat', demSum],
+                                            ['Republican', repSum]
+                                            );
+                                        console.log(x);
+                                        
+                                        //highcharts pie chart
+                                        $(function () {
+                                            Highcharts.setOptions   ({
+                                                colors: ['#232066', '#E91D0E'],
+                                            });
+                                            $('#piecontainer').highcharts({
+                                                chart: {
+                                                    plotBackgroundColor: null,
+                                                    plotBorderWidth: 1,//null,
+                                                    plotShadow: false
+                                                },
+                                                title: {
+                                                    text: 'Scoreboard: Total Raised by Demcrats & Republicans'
+                                                },
+                                                tooltip: {
+                                                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                                                },
+                                                plotOptions: {
+                                                    pie: {
+                                                        allowPointSelect: true,
+                                                        cursor: 'pointer',
+                                                        dataLabels: {
+                                                            enabled: true,
+                                                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                                            style: {
+                                                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                series: [{
+                                                    type: 'pie',
+                                                    name: 'Total Contribuitons Share',
+                                                    data: x
+                                                }]
+                                            });
+                                        });
+                                        console.log(demName)
+                                        // 3d democrat bar chart
+                                        $(function () {
+                                        $('#dembarcontainer').highcharts({
+
+                                            chart: {
+                                                type: 'column',
+                                                margin: 75,
+                                                options3d: {
+                                                    enabled: true,
+                                                    alpha: 10,
+                                                    beta: 25,
+                                                    depth: 70
+                                                }
+                                            },
+                                            title: {
+                                                text: 'Democrat Total from PACS'
+                                            },
+                                            plotOptions: {
+                                                column: {
+                                                    depth: 25
+                                                }
+                                            },
+                                            xAxis: {
+                                                categories: demName,
+                                            },
+                                            yAxis: {
+                                                opposite: true
+                                            },
+                                            series: [{
+                                                name: 'Contributions',
+                                                data: demTotalFromPacs,
+                                            }]
+                                        });
+                                    });
+                                    // 3d republican bar chart
+                                    $(function () {
+                                        Highcharts.setOptions   ({
+                                                colors: ['#E91D0E'],
+                                        });
+                                        $('#repbarcontainer').highcharts({
+
+                                            chart: {
+                                                type: 'column',
+                                                margin: 75,
+                                                options3d: {
+                                                    enabled: true,
+                                                    alpha: 10,
+                                                    beta: 25,
+                                                    depth: 70
+                                                }
+                                            },
+                                            title: {
+                                                text: 'Republicans Total from PACS'
+                                            },
+                                            plotOptions: {
+                                                column: {
+                                                    depth: 25
+                                                }
+                                            },
+                                            xAxis: {
+                                                categories: repName,
+                                            },
+                                            yAxis: {
+                                                opposite: true
+                                            },
+                                            series: [{
+                                                name: 'Contributions',
+                                                data: repTotalFromPacs,
+                                            }]
+                                        });
+                                    });    
                                 }
+
             })
+        
     $.ajax({
         url: "http://api.nytimes.com/svc/elections/us/v3/finances/2014/candidates/leaders/receipts-total.json?api-key=c353cbc0ae7d858a504f6ed663c0a326:5:69483126",
         //force to handle it as jsonp by adding 'callback='
@@ -92,16 +268,15 @@ $( document ).ready(function() {
         console.log("timeout is off")
         $('#twentyNewestPacsContainer').marquee( {
                 direction: 'up',
-                duration: 50000,
+                duration: 20000,
                 duplicated: true,
             });
             
             $('#twentyNewestSuperPacsContainer').marquee( {
                 direction: 'up',
-                duration: 50000,
+                duration: 20000,
                 duplicated: true,
             });
     },9000);
-
 
 });
