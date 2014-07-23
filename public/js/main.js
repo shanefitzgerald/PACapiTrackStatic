@@ -82,16 +82,19 @@ var repName = [];
                                         //highcharts pie chart
                                         $(function () {
                                             Highcharts.setOptions   ({
-                                                colors: ['#232066', '#E91D0E'],
+                                                colors: ['#232066','#E91D0E'],
                                             });
                                             $('#piecontainer').highcharts({
                                                 chart: {
-                                                    plotBackgroundColor: null,
-                                                    plotBorderWidth: 1,//null,
-                                                    plotShadow: false
+                                                    type: 'pie',
+                                                    options3d: {
+                                                        enabled: true,
+                                                        alpha: 45,
+                                                        beta: 0
+                                                    }
                                                 },
                                                 title: {
-                                                    text: 'Scoreboard: Total Raised by Demcrats & Republicans'
+                                                    text: 'Scoreboard: Total Contributions to Democrats VS Repulicans'
                                                 },
                                                 tooltip: {
                                                     pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -100,18 +103,16 @@ var repName = [];
                                                     pie: {
                                                         allowPointSelect: true,
                                                         cursor: 'pointer',
+                                                        depth: 35,
                                                         dataLabels: {
                                                             enabled: true,
-                                                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                                                            style: {
-                                                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                                                            }
+                                                            format: '{point.name}'
                                                         }
                                                     }
                                                 },
                                                 series: [{
                                                     type: 'pie',
-                                                    name: 'Total Contribuitons Share',
+                                                    name: 'Scoreboard',
                                                     data: x
                                                 }]
                                             });
