@@ -1,6 +1,6 @@
 $( document ).ready(function() {
-    console.log( "ready!" );
-    $("#owl-example").owlCarousel();
+    
+    $("#owl-example").owlCarousel(console.log('test'));
 
 var repSum = 0;
 var demSum = 0;
@@ -78,7 +78,7 @@ var repName = [];
                                             ['Democrat', demSum],
                                             ['Republican', repSum]
                                             );
-                                        console.log(x);
+                                        
                                         
                                         //highcharts pie chart
                                         $(function () {
@@ -118,7 +118,7 @@ var repName = [];
                                                 }]
                                             });
                                         });
-                                        console.log(demName)
+                                        
                                         // 3d democrat bar chart
                                         $(function () {
                                         $('#dembarcontainer').highcharts({
@@ -267,7 +267,7 @@ var repName = [];
 
         });
     setTimeout(function(){
-        console.log("timeout is off")
+        
         $('#twentyNewestPacsContainer').marquee( {
                 direction: 'up',
                 duration: 20000,
