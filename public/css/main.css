@@ -206,6 +206,22 @@ a:after {
 	font-weight: bold;
 }
 
+#twentyNewestPacsContainer {
+            width: 300px;
+            height: 300px;
+            overflow: hidden;
+            border:1px solid #ccc;
+            
+        }
+
+#twentyNewestSuperPacsContainer {
+            width: 300px;
+            height: 300px;
+            overflow: hidden;
+            border:1px solid #ccc;
+            
+        }
+
 
 
 

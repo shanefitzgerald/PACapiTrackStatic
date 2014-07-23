@@ -48,4 +48,60 @@ $( document ).ready(function() {
                                             )};
                                 }
             })
+    $.ajax({
+            // make API call to nytimes to get most recently added commities
+            url: "http://api.nytimes.com/svc/elections/us/v3/finances/2014/committees/new.json?api-key=c353cbc0ae7d858a504f6ed663c0a326:5:69483126",
+            dataType: 'jsonp',
+            success: function(data) {
+                for (var key in data.results) {
+                    if (data.results != null) {
+                        // From the json display the name, treasure name, state and link to fec
+                        $('#twentyNewestPacsContainer').append (
+                            '<div class="pacs"><h5 id="' + data.results[key].id + '">' + data.results[key].name  + '</h5>' + 
+                            '<p>Treasure: ' + data.results[key].treasurer +    '</p>' +
+                            '<p>State: ' + data.results[key].state + '</p>' +
+                            '<p><a href="'  + data.results[key].fec_uri + '">FEC Link</a></p>' +
+                            '</div>'
+                        )
+                    }
+                };
+            }
+        })
+    $.ajax({
+            // make API call to nytimes to get most recent SUPER PACS
+            url: "http://api.nytimes.com/svc/elections/us/v3/finances/2014/committees/superpacs.json?api-key=c353cbc0ae7d858a504f6ed663c0a326:5:69483126",
+            dataType: 'jsonp',
+            success: function(data) {
+                for (var key in data.results) {
+                    if (data.results != null) {
+                        // From the json display the name, treasure name, state and link to fec
+                        $('#twentyNewestSuperPacsContainer').append (
+                            '<div class="pacs"><h5 id="' + data.results[key].id + '">' + data.results[key].name  + '</h5>' + 
+                            '<p>Treasure: ' + data.results[key].treasurer + '</p>' +
+                            '<p>State: ' + data.results[key].state + '</p>' +
+                            '<p><a href="'  + data.results[key].fec_uri + '">FEC Link</a></p>' +
+                            '</div>'
+                        )
+                    }
+                };
+
+            }
+
+        });
+    setTimeout(function(){
+        console.log("timeout is off")
+        $('#twentyNewestPacsContainer').marquee( {
+                direction: 'up',
+                duration: 50000,
+                duplicated: true,
+            });
+            
+            $('#twentyNewestSuperPacsContainer').marquee( {
+                direction: 'up',
+                duration: 50000,
+                duplicated: true,
+            });
+    },9000);
+
+
 });
