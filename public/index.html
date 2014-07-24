@@ -206,8 +206,10 @@
         </div><!-- close of row -->
       </div><!-- close of container -->
     </div><!-- close of newpacwrapper -->
+
     <section id="graphs" name="graphs"></section>
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <div id="graphwrapper">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false">
       <!-- Indicators -->
       <ol class="carousel-indicators">
         <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -218,13 +220,45 @@
       <!-- Wrapper for slides -->
       <div class="carousel-inner">
         <div class="item active">
+          <div class="row center">
+            <div class="col-xs-12">
+              <h2>This is the Scoreboard Tracking Dem & Rep Contributions Total</h2>
+            </div>
+          </div>
           <div id="piecontainer"></div>
         </div>
         <div class="item">
+          <div class="row center">
+            <div class="col-xs-12">
+              <h2>Tracking the Amount Recieved from PACS by Democrats</h2>
+            </div>
+          </div>
           <div id="dembarcontainer"></div>
+          
         </div>
         <div class="item">
+          <div class="row center">
+            <div class="col-xs-12">
+              <h2>Tracking the Amount Recieved from PACS by Republicans</h2>
+            </div>
+          </div>
           <div id="repbarcontainer"></div>
+        </div>
+        <div class="item">
+          <div class="row center">
+            <div class="col-xs-12">
+              <h2>Tracking the Amount Recieved from Individual Donations by Republicans</h2>
+            </div>
+          </div>
+          <div id="repbarcontainertotal"></div>
+        </div>
+        <div class="item">
+          <div class="row center">
+            <div class="col-xs-12">
+              <h2>Tracking the Amount Recieved from Individual DOnations by Democrats</h2>
+            </div>
+          </div>
+          <div id="dembarcontainertotal"></div>
         </div>
         ...
       </div>
@@ -236,6 +270,7 @@
       <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
         <span class="glyphicon glyphicon-chevron-right"></span>
       </a>
+    </div>
     </div>
       
       

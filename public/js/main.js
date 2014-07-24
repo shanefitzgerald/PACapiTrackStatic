@@ -9,8 +9,12 @@ var demTotalArray = [];
 var repTotalArray = [];
 var demTotalFromPacs = [];
 var repTotalFromPacs = [];
+var demTotalFromIndiv = [];
+var repTotalFromIndiv = [];
 var demName = [];
 var repName = [];
+var demNameTotal = [];
+var repNameTotal = [];
 
     $.ajax({
         url: "http://api.nytimes.com/svc/elections/us/v3/finances/2014/candidates/leaders/pac-total.json?api-key=c353cbc0ae7d858a504f6ed663c0a326:5:69483126",
@@ -43,6 +47,7 @@ var repName = [];
                                             repTotalFromPacs.push(data1.results[key].total_from_pacs);
                                             //bild array of rep names for highchart.js 3d bar chart
                                             repName.push(data1.results[key].name);
+                                            
                                             };
                                         };
 
@@ -92,8 +97,10 @@ var repName = [];
                                                         enabled: true,
                                                         alpha: 45,
                                                         beta: 0,
-                                                        backgroundColor: null,
-                                                    }
+                                                        
+                                                    },
+                                                    backgroundColor: 'transparent',
+
                                                 },
                                                 title: {
                                                     text: 'Scoreboard: Total Contributions to Democrats VS Repulicans'
@@ -108,14 +115,22 @@ var repName = [];
                                                         depth: 35,
                                                         dataLabels: {
                                                             enabled: true,
-                                                            format: '{point.name}'
-                                                        }
+                                                            format: '{point.name}',
+                                                                style: {
+                                                                    color: 'black',
+                                                                    fontSize: '2em',
+                                                                },
+                                                        },
+                                                    style: {
+                                                        color: 'black',
+                                                    },
                                                     }
                                                 },
                                                 series: [{
                                                     type: 'pie',
                                                     name: 'Scoreboard',
-                                                    data: x
+                                                    data: x,
+                                                    
                                                 }]
                                             });
                                         });
@@ -132,8 +147,9 @@ var repName = [];
                                                     alpha: 10,
                                                     beta: 25,
                                                     depth: 70,
-                                                    backgroundColor: null,
-                                                }
+                                                    
+                                                },
+                                                backgroundColor: 'transparent',
                                             },
                                             title: {
                                                 text: 'Democrat Total from PACS'
@@ -141,7 +157,9 @@ var repName = [];
                                             plotOptions: {
                                                 column: {
                                                     depth: 25
-                                                }
+                                                    
+                                                },
+                                                
                                             },
                                             xAxis: {
                                                 categories: demName,
@@ -170,8 +188,9 @@ var repName = [];
                                                     alpha: 10,
                                                     beta: 25,
                                                     depth: 70,
-                                                    bbackgroundColor: null,
-                                                }
+                                                    
+                                                },
+                                                backgroundColor: 'transparent',
                                             },
                                             title: {
                                                 text: 'Republicans Total from PACS'
@@ -227,6 +246,117 @@ var repName = [];
                                                 '<td>' + data.results[key].date_coverage_to + '</td>' +
                                             '</tr>'
                                             )};
+
+                                            for (var key in data.results) {
+                                                if (data.results[key].party === 'DEM') {
+                                                    //build array of dem total donations from individuals
+                                                    demTotalFromIndiv.push(data.results[key].total_from_individuals);
+                                                    demNameTotal.push(data.results[key].name);
+                                                } else {
+                                                    //build array of rep total donations from indiviuals
+                                                    repTotalFromIndiv.push(data.results[key].total_from_individuals);
+                                                    repNameTotal.push(data.results[key].name);
+                                                };
+                                            };
+                                            // make the total donations dem array numbers and not strings 
+                                            demTotalFromIndiv = demTotalFromIndiv.map(function (x) { 
+                                            return parseInt(x);
+                                            });
+                                            // make the total donations rep array numbers and not strings 
+                                            repTotalFromIndiv = repTotalFromIndiv.map(function (x) { 
+                                            return parseInt(x);
+                                            
+                                            });
+
+                                            console.log(repTotalFromIndiv);
+                                            console.log(demTotalFromIndiv);
+                                            // 3d republican bar chart
+                                    $(function () {
+                                        Highcharts.setOptions   ({
+                                                colors: ['#E91D0E'],
+                                                 backgroundColor:'rgba(255, 255, 255, 0.1)',
+
+                                        });
+                                        $('#repbarcontainertotal').highcharts({
+
+                                            chart: {
+                                                type: 'column',
+                                                margin: 75,
+                                                options3d: {
+                                                    enabled: true,
+                                                    alpha: 10,
+                                                    beta: 25,
+                                                    depth: 70,
+                                                    
+                                                },
+                                                backgroundColor: 'transparent',
+                                            },
+                                            title: {
+                                                text: 'Republicans Total from Individuals'
+                                            },
+                                            plotOptions: {
+                                                column: {
+                                                    depth: 25
+                                                }
+                                            },
+                                            xAxis: {
+                                                categories: repNameTotal,
+                                            },
+                                            yAxis: {
+                                                opposite: true
+                                            },
+                                            series: [{
+                                                name: 'Contributions',
+                                                data: repTotalFromIndiv,
+                                            }]
+                                        });
+                                    });
+                                    // 3d democrat bar chart
+                                        $(function () {
+                                            Highcharts.setOptions   ({
+                                                colors: ['#232066'],
+                                        
+                                            });
+                                        $('#dembarcontainertotal').highcharts({
+
+                                            chart: {
+                                                
+
+                                                type: 'column',
+                                                margin: 75,
+                                                options3d: {
+                                                    enabled: true,
+                                                    alpha: 10,
+                                                    beta: 25,
+                                                    depth: 70,
+                                                    
+                                                },
+                                                backgroundColor: 'transparent',
+                                                fontFamily: 'serif',
+                                                color: 'black'
+                                            },
+                                            title: {
+                                                text: 'Democrat Total from Individuals'
+                                            },
+                                            plotOptions: {
+                                                column: {
+                                                    depth: 25
+                                                }
+                                            },
+                                            xAxis: {
+                                                categories: demNameTotal,
+
+                                            },
+                                            yAxis: {
+                                                opposite: true
+                                            },
+                                            series: [{
+                                                name: 'Contributions',
+                                                data: demTotalFromIndiv,
+
+                                            }]
+                                        });
+                                    });
                                 }
             })
     $.ajax({
