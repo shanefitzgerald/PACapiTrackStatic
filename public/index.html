@@ -37,11 +37,9 @@
             <div class="dropdown">
               <ul id="nav" class="nav">
                 <li class="menu-item"><a class="smoothScroll" href="#about" title="About"><i class="icon-user"></i>&nbsp; About</a></li>
-                <li class="menu-item"><a class="smoothScroll" href="#resume" title="Resume"><i class="icon-file"></i>&nbsp; Top Twenty SuperPAC Recipients</a></li>
-                <li class="menu-item"><a class="smoothScroll" href="#skills" title="Skills"><i class="fa fa-wrench"></i>&nbsp; Top Twenty PAC Recipients</a></li>
-                <li class="menu-item"><a class="smoothScroll" href="#skills" title="Skills"><i class="fa fa-wrench"></i>&nbsp; Top Twenty Individual Dona Recipients</a></li>
-                <li class="menu-item"><a class="smoothScroll" href="#work" title="Works"><i class="icon-briefcase"></i>&nbsp; Latest SuperPACs & PACS</a></li>
-                <li class="menu-item"><a class="smoothScroll" href="#contact" title="Contact"><i class="icon-envelope"></i>&nbsp; Graphs</a></li>
+                <li class="menu-item"><a class="smoothScroll" href="#table" title="Resume"><i class="icon-file"></i>&nbsp; Top Twenty Recipients</a></li>
+                <li class="menu-item"><a class="smoothScroll" href="#latest" title="Works"><i class="icon-briefcase"></i>&nbsp; Latest SuperPACs & PACS</a></li>
+                <li class="menu-item"><a class="smoothScroll" href="#graphs" title="Contact"><i class="icon-envelope"></i>&nbsp; Graphs</a></li>
               </ul><!--/ uL#nav -->
             </div><!-- /.dropdown -->
 
@@ -53,7 +51,7 @@
       </div><!--/ #topbar-inner -->
     </div><!--/ #section-topbar -->
     
-    <div id="headerwrap">
+    <div id="headerwrap" name="about">
       <div class="container" id="intro">
           <div class="row centered">
             <div class="col-lg-12">
@@ -68,7 +66,7 @@
           </div><!-- end row centered -->
       </div><!-- end container -->
     </div><!-- end headerwrap -->
-
+    <section id="table" name="table"></section>
     <div id="carousel-example-generic1" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
       <ol class="carousel-indicators">
@@ -78,6 +76,7 @@
       </ol>
 
   <!-- Wrapper for slides -->
+    <div class="slidewrapper">
       <div class="carousel-inner">
         <div class="item active">
           <div id="senatorSuperPacwrap">
@@ -109,6 +108,7 @@
             </div><!-- end container -->
           </div><!-- end senatorSuperPacwrap --> 
         </div><!-- end of carosel item -->
+
         <div class="item">
           <div id="senatorSuperPacwrap">
             <div class="container center-block" id="senator">
@@ -171,7 +171,7 @@
         </div><!-- end of carosel item -->
         ...
       </div>
-
+    </div>
   <!-- Controls -->
       <a class="left carousel-control" href="#carousel-example-generic1" role="button" data-slide="prev">
         <span class="glyphicon glyphicon-chevron-left"></span>
@@ -181,18 +181,18 @@
       </a>
     </div>
 
-    <div id="newpacwrapper">
+    <div id="newpacwrapper" name="latest">
       <div class="container">
-        <div class="row">
+        <div class="row center">
           <div class="col-xs-12">
             <h2>These are the Latest PACS and SuperPAC's as they are registared with the FEC</h2>
           </div>
         </div>
-        <div class="row">
+        <div class="row center">
           <div class="col-md-offset-1 col-md-5"><h3>Newest PAC's</h3></div>
           <div class="col-md-5"><h3>Newest SuperPAC's</h3></div>
         </div>
-        <div class="row">
+        <div class="row center">
           <div class="col-md-offset-2 col-md-5">
             <div id="twentyNewestPacsContainer">
               <!-- jsonp is getting inserted here -->
@@ -206,7 +206,7 @@
         </div><!-- close of row -->
       </div><!-- close of container -->
     </div><!-- close of newpacwrapper -->
-
+    <section id="graphs" name="graphs"></section>
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->
       <ol class="carousel-indicators">
@@ -258,6 +258,7 @@
         <script src="js/vendor/bootstrap.min.js"></script>
         <script src="js/vendor/jquery.marquee.min.js"></script>
         <script src="js/vendor/owl.carousel.js"></script>
+        <script src="js/vendor/smoothscroll.js"></script>
 
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>

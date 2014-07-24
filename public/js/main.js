@@ -91,7 +91,8 @@ var repName = [];
                                                     options3d: {
                                                         enabled: true,
                                                         alpha: 45,
-                                                        beta: 0
+                                                        beta: 0,
+                                                        backgroundColor: null,
                                                     }
                                                 },
                                                 title: {
@@ -130,7 +131,8 @@ var repName = [];
                                                     enabled: true,
                                                     alpha: 10,
                                                     beta: 25,
-                                                    depth: 70
+                                                    depth: 70,
+                                                    backgroundColor: null,
                                                 }
                                             },
                                             title: {
@@ -167,7 +169,8 @@ var repName = [];
                                                     enabled: true,
                                                     alpha: 10,
                                                     beta: 25,
-                                                    depth: 70
+                                                    depth: 70,
+                                                    bbackgroundColor: null,
                                                 }
                                             },
                                             title: {
